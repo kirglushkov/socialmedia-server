@@ -10,6 +10,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
+import authRoutes from "./routes/auth.js"
+import { register } from "./controllers/auth.js";
+import userRoutes from "./routes/users.js"
+import postRoutes from "./routes/posts.js"
+import { verifyToken } from "./middleware/auth.js";
+import {createPost} from "./controllers/posts.js" 
 
 const userIds = [
     new mongoose.Types.ObjectId(),
@@ -34,8 +40,29 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+/* FILE STORAGE */
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/assets");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
+const upload = multer({ storage });
+app.post("/auth/register", register)
+app.post("/posts", verifyToken, upload.single('picture'), createPost)
+
+
+app.get("/home", (req, res)=> {
+  res.send("hello world")
+})
+
+app.use("/auth", authRoutes)
+app.use("/users", userRoutes)
+app.use('/posts', postRoutes)
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
