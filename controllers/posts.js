@@ -29,8 +29,9 @@ export const createPost = async (req, res) => {
 /* READ */
 export const getFeedPosts = async (req, res) => {
   try {
-    const post = await Post.find();
-    res.status(200).json(post);
+    const limit = req.query.limit ? parseInt(req.query.limit) : 0;
+    const posts = await Post.find().limit(limit);
+    res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
