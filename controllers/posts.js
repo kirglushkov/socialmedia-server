@@ -29,9 +29,7 @@ export const createPost = async (req, res) => {
 /* READ */
 export const getFeedPosts = async (req, res) => {
   try {
-    const limit = req.query.limit ? parseInt(req.query.limit) : 0;
-    const startPos = req.query.start ? parseInt(req.query.start) : 0;
-    const posts = await Post.find().sort({ createdAt: 1 }).skip(startPos).limit(limit);
+    const posts = await Post.find();
     res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -41,7 +39,7 @@ export const getFeedPosts = async (req, res) => {
 export const getUserPosts = async (req, res) => {
   try {
     const { userId } = req.params;
-    const post = await Post.find({ userId }).sort({ createdAt: 1 });
+    const post = await Post.find({ userId });
     res.status(200).json(post);
   } catch (err) {
     res.status(404).json({ message: err.message });
