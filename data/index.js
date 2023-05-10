@@ -171,7 +171,7 @@ export const posts = [
   },
   {
     _id: new mongoose.Types.ObjectId(),
-    userId: userIds[1],
+    userId: userIds[2],
     firstName: "Whatcha",
     lastName: "Doing",
     location: "Korea, CA",
@@ -194,8 +194,8 @@ export const posts = [
   },
   {
     _id: new mongoose.Types.ObjectId(),
-    userId: userIds[2],
-    firstName: "Jane",
+    userId: userIds[3],
+    firstName: "Джейн",
     lastName: "Doe",
     location: "Utah, CA",
     description:
@@ -218,7 +218,7 @@ export const posts = [
   },
   {
     _id: new mongoose.Types.ObjectId(),
-    userId: userIds[3],
+    userId: userIds[4],
     firstName: "Harvey",
     lastName: "Dunn",
     location: "Los Angeles, CA",
@@ -242,7 +242,7 @@ export const posts = [
   },
   {
     _id: new mongoose.Types.ObjectId(),
-    userId: userIds[4],
+    userId: userIds[5],
     firstName: "Carly",
     lastName: "Vowel",
     location: "Chicago, IL",
@@ -266,7 +266,7 @@ export const posts = [
   },
   {
     _id: new mongoose.Types.ObjectId(),
-    userId: userIds[5],
+    userId: userIds[6],
     firstName: "Jessica",
     lastName: "Dunn",
     location: "Washington, DC",

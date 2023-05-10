@@ -11,6 +11,17 @@ export const getUser = async (req, res) => {
   }
 };
 
+export const getUsers = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const users = await User.find();
+    const filteredUsers = users.filter(user => user._id.toString() !== id);
+    res.status(200).json(filteredUsers);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 export const getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;
